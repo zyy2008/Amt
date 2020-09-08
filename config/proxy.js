@@ -8,7 +8,7 @@
 export default {
   dev: {
     '/api/': {
-      target: 'http://3.19.172.198:8080/',
+      target: 'https://api.americanmuslimtoday.net/',
       changeOrigin: true,
       pathRewrite: {
         '^/api': '',

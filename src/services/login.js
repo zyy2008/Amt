@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 export async function fakeAccountLogin(params) {
-  return request('/amt-news/oauth/token', {
+  return request('/api/amt-news/oauth/token', {
     method: 'POST',
     data: 'grant_type=password&username=' + params.username + '&password=' + params.password,
     login: true,

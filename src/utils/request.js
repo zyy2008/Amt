@@ -74,7 +74,7 @@ request.interceptors.request.use((url, options) => {
   };
   const { login } = options;
   if (!login) {
-    url = 'http://localhost:8080/amt-news/api/v1' + url.split('/api')[1];
+    url = '/api/amt-news/api/v1' + url.split('/api')[1];
   }
 
   return {

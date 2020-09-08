@@ -37,7 +37,7 @@ export const TableList = (props) => {
         });
         break;
       case '1':
-        history.push('/edit/' + record.newsId)
+        history.push('/edit/' + record.newsId);
         break;
 
       default:
@@ -46,6 +46,20 @@ export const TableList = (props) => {
   };
 
   const menu = (record) => {
+    return (
+      <Menu onClick={(val) => handleButtonClick(val, record)}>
+        <Menu.Item key="0">
+          <DeleteOutlined />
+          delete
+        </Menu.Item>
+        <Menu.Item key="1">
+          <EditOutlined />
+          edit
+        </Menu.Item>
+      </Menu>
+    );
+  };
+  const title = () => {
     return (
       <Menu onClick={(val) => handleButtonClick(val, record)}>
         <Menu.Item key="0">
@@ -106,12 +120,15 @@ export const TableList = (props) => {
     },
   ];
 
-  const getData = page => {
+  const getData = (page) => {
     dispatch({
       type: 'ListTableList/fetch',
       payload: {
         page: page,
         pageSize: 10,
+        showArchived: false,
+        category: '',
+        region: '',
       },
     });
   };
@@ -136,7 +153,7 @@ export const TableList = (props) => {
       <Card
         style={{ marginTop: 16 }}
         type="inner"
-        title={<div></div>}
+        title={title}
         extra={
           <Button type="primary" onClick={() => history.push('/news')}>
             Add
@@ -148,10 +165,10 @@ export const TableList = (props) => {
           pagination={{
             current: page,
             showSizeChanger: false,
-            total: list.totalCount,
+            total: list.totalCount ? list.totalCount : 0,
             onChange: (page) => currentPage(page),
           }}
-          dataSource={list.list}
+          dataSource={list.list ? list.list : []}
           loading={loading}
           rowKey="newsId"
         />
